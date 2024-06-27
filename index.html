@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felicitaciones de Cumpleaños</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 100%), url("tulips.png");
+            background-size: cover;
+            background-position: bottom;
+        }
+        @keyframes confetti {
+            0% { top: -10%; transform: rotate(0deg); }
+            100% { top: 110%; transform: rotate(720deg); }
+        }
+        .confetti {
+            position: absolute;
+            top: -10%;
+            width: 10px;
+            height: 20px;
+            background: rgba(255, 4, 175, 0.8);
+            animation: confetti 5s infinite;
+            z-index: 1;
+        }
+        @keyframes floatUp {
+            0% { bottom: -10%; }
+            100% { bottom: 110%; }
+        }
+        .balloon {
+            position: absolute;
+            bottom: -10%;
+            width: 40px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(to top, #ff04c4, #ffffff);
+            animation: floatUp 10s linear infinite;
+            z-index: 1;
+        }
+        #left-frame, #right-frame {
+            position: absolute;
+            top: 50%;
+            width: 300px; /* Ajusta el tamaño del marco según sea necesario */
+            height: 450px; /* Ajusta el tamaño del marco según sea necesario */
+            background: rgba(255, 255, 255, 0.9);
+            border: 5px solid #ff39b0; /* Cambia el color del borde según sea necesario */
+            border-radius: 10px;
+            overflow: hidden;
+            transform: translateY(-50%);
+            z-index: 2; /* Asegúrate de que los marcos estén en el frente */
+        }
+        #left-frame {
+            left: 5%;
+        }
+        #right-frame {
+            right: 5%;
+        }
+        #cake-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            z-index: 2;
+        }
+        #cake-image {
+            position: relative;
+            animation: bounce 2s infinite;
+            z-index: 3; /* Asegúrate de que la imagen del pastel esté en el frente */
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        #message {
+            font-size: 24px;
+            margin-top: 0px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 5px solid rgb(255, 57, 176);
+            box-shadow: 0px 0px 10px rgb(255, 0, 170);
+            animation: slideIn 2s ease-in-out;
+            width: 80%;
+            max-width: 500px;
+            z-index: 3; /* Asegúrate de que el mensaje esté en el frente */
+        }
+        @keyframes slideIn {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Banderines */
+        #bunting-top, #bunting-cake {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            z-index: 4; /* Asegúrate de que los banderines estén en el frente */
+        }
+        #bunting-top {
+            top: 0px;
+            height:90px;
+        }
+        #bunting-cake {
+            top: 0px; /* Ajusta según la posición del pastel */
+            height: 80px;
+        }
+     
+        /* Texto de Feliz Cumpleaños */
+        #birthday-text {
+            position: absolute;
+            top: 20px; /* Ajusta según la posición del texto */
+            font-size: 100px;
+            font-weight: bold;
+            color: #ff00b7;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 5; /* Asegúrate de que el texto esté en el frente */
+            text-stroke: 2px rgb(5, 5, 5);
+            -webkit-text-stroke: 3px rgb(255, 255, 255); /* Para compatibilidad con Safari */
+            text-fill-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Corazones cayendo */
+        @keyframes hearts-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(720deg); }
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgb(253, 1, 1);
+            clip-path: polygon(50% 0%, 100% 40%, 90% 100%, 50% 80%, 10% 100%, 0% 40%);
+            animation: hearts-fall 10s linear infinite;
+            z-index: 1;
+        }
+        .heart:nth-child(2) {
+            width: 30px;
+            height: 30px;
+            animation-duration: 8s;
+            left: 10%;
+        }
+        .heart:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            animation-duration: 12s;
+            left: 20%;
+        }
+        .heart:nth-child(4) {
+            width: 22px;
+            height: 22px;
+            animation-duration: 9s;
+            left: 30%;
+        }
+        .heart:nth-child(5) {
+            width: 28px;
+            height: 28px;
+            animation-duration: 11s;
+            left: 40%;
+        }
+        .heart:nth-child(6) {
+            width: 24px;
+            height: 24px;
+            animation-duration: 10s;
+            left: 50%;
+        }
+        .heart:nth-child(7) {
+            width: 27px;
+            height: 27px;
+            animation-duration: 12s;
+            left: 60%;
+        }
+        .heart:nth-child(8) {
+            width: 23px;
+            height: 23px;
+            animation-duration: 9s;
+            left: 70%;
+        }
+        .heart:nth-child(9) {
+            width: 21px;
+            height: 21px;
+            animation-duration: 8s;
+            left: 80%;
+        }
+        .heart:nth-child(10) {
+            width: 26px;
+            height: 26px;
+            animation-duration: 10s;
+            left: 90%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Confetti -->
+    <div class="confetti" style="left: 10%; animation-duration: 5s;"></div>
+    <div class="confetti" style="left: 20%; animation-duration: 7s;"></div>
+    <div class="confetti" style="left: 30%; animation-duration: 9s;"></div>
+    <div class="confetti" style="left: 40%; animation-duration: 6s;"></div>
+    <div class="confetti" style="left: 50%; animation-duration: 8s;"></div>
+    <div class="confetti" style="left: 60%; animation-duration: 10s;"></div>
+    <div class="confetti" style="left: 70%; animation-duration: 7s;"></div>
+    <div class="confetti" style="left: 80%; animation-duration: 6s;"></div>
+    <div class="confetti" style="left: 90%; animation-duration: 9s;"></div>
+
+    <!-- Floating Balloons -->
+    <div class="balloon" style="left: 20%; animation-duration: 7s;"></div>
+    <div class="balloon" style="left: 40%; animation-duration: 5s;"></div>
+    <div class="balloon" style="left: 60%; animation-duration: 8s;"></div>
+    <div class="balloon" style="left: 80%; animation-duration: 6s;"></div>
+
+    <!-- Frames for Photos -->
+    <div id="left-frame">
+        <img src="foto1.jpeg" alt="Foto 1" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <div id="right-frame">
+        <img src="foto2.jpeg" alt="Foto 2" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+
+    <!-- Cake and Message -->
+    <div id="cake-container">
+        <img id="cake-image" src="pastel.png" alt="Pastel de cumpleaños"> <!-- Usa tu imagen de pastel -->
+    </div>
+    <div id="message">
+        ¡Feliz Cumpleaños a la niña más Hermosa del Mundo😍!<br>
+        Te deseo muchos éxitos en tu vida👑<br>
+        Que sigas cumpliendo muchos años más🥳<br>
+        Te Amo Mucho Mucho y pasatela bien💗
+    </div>
+
+    <div id="bunting-cake">
+        <div class="flag"></div>
+        <div class="flag flag-light"></div>
+        <div class="flag"></div>
+        <div class="flag flag-light"></div>
+        <div class="flag"></div>
+        <div class="flag flag-light"></div>
+        <div class="flag"></div>
+        <div class="flag flag-light"></div>
+    </div>
+
+    <!-- Birthday Text -->
+    <div id="birthday-text">
+        ¡Feliz Cumpleaños!
+    </div>
+
+    <!-- Corazones cayendo -->
+    <div class="heart" style="left: 5%; animation-duration: 7s;"></div>
+    <div class="heart" style="left: 15%; animation-duration: 8s;"></div>
+    <div class="heart" style="left: 25%; animation-duration: 9s;"></div>
+    <div class="heart" style="left: 35%; animation-duration: 10s;"></div>
+    <div class="heart" style="left: 45%; animation-duration: 11s;"></div>
+    <div class="heart" style="left: 55%; animation-duration: 12s;"></div>
+    <div class="heart" style="left: 65%; animation-duration: 8s;"></div>
+    <div class="heart" style="left: 75%; animation-duration: 9s;"></div>
+    <div class="heart" style="left: 85%; animation-duration: 10s;"></div>
+    <div class="heart" style="left: 95%; animation-duration: 11s;"></div>
+</body>
+</html>
